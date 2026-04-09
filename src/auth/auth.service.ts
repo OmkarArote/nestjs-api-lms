@@ -28,7 +28,8 @@ export class AuthService {
       ...registerDto,
       password: hash
     });
-    let token = await this.jwtService.signAsync({ email: createdUser.email, id: createdUser._id, role: createdUser.role });
-    return { ...createdUser.toObject(), token };
+    let access_token = await this.jwtService.signAsync({ email: createdUser.email, id: createdUser._id, role: createdUser.role });
+    // return { ...createdUser.toObject(), access_token };
+    return { access_token };
   }
 }
