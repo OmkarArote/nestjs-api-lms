@@ -32,4 +32,15 @@ export class AuthService {
     // return { ...createdUser.toObject(), access_token };
     return { access_token };
   }
+
+  async loginUser(registerDto: RegisterUserDto): Promise<object> {
+    let hash: string = await bcrypt.hash(registerDto.password, saltRounds)
+    const createdUser = await this.userService.createUser({
+      ...registerDto,
+      password: hash
+    });
+    let access_token = await this.jwtService.signAsync({ email: createdUser.email, id: createdUser._id, role: createdUser.role });
+    // return { ...createdUser.toObject(), access_token };
+    return { access_token };
+  }
 }

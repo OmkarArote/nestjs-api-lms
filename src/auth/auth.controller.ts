@@ -20,6 +20,13 @@ export class AuthController {
     return await this.authService.registerUser(registerDto);
   }
 
+  @Post('login')
+  async login(@Body() registerDto: RegisterUserDto) {
+    // Login logic here
+    return await this.authService.loginUser(registerDto);
+    // return await this.authService.registerUser(registerDto);
+  }
+
   @Get('profile')
   @UseGuards(AuthGuard)
   async getProfile(@Request() req) {
