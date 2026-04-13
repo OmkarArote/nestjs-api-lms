@@ -28,4 +28,8 @@ export class UserService {
       throw error;
     }
   }
+
+  async findUserByEmail(email: string): Promise<User | null> {
+    return await this.userModel.findOne({ email });
+  }
 }
